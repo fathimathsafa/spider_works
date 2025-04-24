@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 import 'package:news_spider/app_config/app_config.dart';
 
 class ApiHelper {
-  // to get data from api
   static getData({
     required String endPoint,
     Map<String, String>? header,

@@ -9,62 +9,99 @@ DetailsModel detailsModelFromJson(String str) => DetailsModel.fromJson(json.deco
 String detailsModelToJson(DetailsModel data) => json.encode(data.toJson());
 
 class DetailsModel {
-    List<Datum>? data;
-    Links? links;
-    Meta? meta;
+    Data? data;
 
     DetailsModel({
         this.data,
-        this.links,
-        this.meta,
     });
 
     factory DetailsModel.fromJson(Map<String, dynamic> json) => DetailsModel(
-        data: json["data"] == null ? [] : List<Datum>.from(json["data"]!.map((x) => Datum.fromJson(x))),
-        links: json["links"] == null ? null : Links.fromJson(json["links"]),
-        meta: json["meta"] == null ? null : Meta.fromJson(json["meta"]),
+        data: json["data"] == null ? null : Data.fromJson(json["data"]),
     );
 
     Map<String, dynamic> toJson() => {
-        "data": data == null ? [] : List<dynamic>.from(data!.map((x) => x.toJson())),
-        "links": links?.toJson(),
-        "meta": meta?.toJson(),
+        "data": data?.toJson(),
     };
 }
 
-class Datum {
+class Data {
     int? id;
     String? slug;
     String? title;
     String? shortDescription;
     DateTime? publishedOn;
     PublishedBy? publishedBy;
+    String? content;
+    dynamic bottomText;
+    dynamic bottomButtonText;
+    dynamic bottomButtonUrl;
+    dynamic bottomButtonTarget;
     FeaturedImage? featuredImage;
-    Category? category;
+    dynamic bannerImage;
+    String? browserTitle;
+    dynamic ogTitle;
+    String? metaDescription;
+    dynamic ogDescription;
+    dynamic ogImage;
+    String? metaKeywords;
+    dynamic bottomDescription;
+    dynamic extraJs;
+    dynamic visitCount;
     List<dynamic>? tags;
+    List<RelatedBlog>? relatedBlogs;
 
-    Datum({
+    Data({
         this.id,
         this.slug,
         this.title,
         this.shortDescription,
         this.publishedOn,
         this.publishedBy,
+        this.content,
+        this.bottomText,
+        this.bottomButtonText,
+        this.bottomButtonUrl,
+        this.bottomButtonTarget,
         this.featuredImage,
-        this.category,
+        this.bannerImage,
+        this.browserTitle,
+        this.ogTitle,
+        this.metaDescription,
+        this.ogDescription,
+        this.ogImage,
+        this.metaKeywords,
+        this.bottomDescription,
+        this.extraJs,
+        this.visitCount,
         this.tags,
+        this.relatedBlogs,
     });
 
-    factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+    factory Data.fromJson(Map<String, dynamic> json) => Data(
         id: json["id"],
         slug: json["slug"],
         title: json["title"],
         shortDescription: json["short_description"],
         publishedOn: json["published_on"] == null ? null : DateTime.parse(json["published_on"]),
         publishedBy: json["published_by"] == null ? null : PublishedBy.fromJson(json["published_by"]),
+        content: json["content"],
+        bottomText: json["bottom_text"],
+        bottomButtonText: json["bottom_button_text"],
+        bottomButtonUrl: json["bottom_button_url"],
+        bottomButtonTarget: json["bottom_button_target"],
         featuredImage: json["featured_image"] == null ? null : FeaturedImage.fromJson(json["featured_image"]),
-        category: json["category"] == null ? null : Category.fromJson(json["category"]),
+        bannerImage: json["banner_image"],
+        browserTitle: json["browser_title"],
+        ogTitle: json["og_title"],
+        metaDescription: json["meta_description"],
+        ogDescription: json["og_description"],
+        ogImage: json["og_image"],
+        metaKeywords: json["meta_keywords"],
+        bottomDescription: json["bottom_description"],
+        extraJs: json["extra_js"],
+        visitCount: json["visit_count"],
         tags: json["tags"] == null ? [] : List<dynamic>.from(json["tags"]!.map((x) => x)),
+        relatedBlogs: json["related_blogs"] == null ? [] : List<RelatedBlog>.from(json["related_blogs"]!.map((x) => RelatedBlog.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
@@ -74,37 +111,24 @@ class Datum {
         "short_description": shortDescription,
         "published_on": publishedOn?.toIso8601String(),
         "published_by": publishedBy?.toJson(),
+        "content": content,
+        "bottom_text": bottomText,
+        "bottom_button_text": bottomButtonText,
+        "bottom_button_url": bottomButtonUrl,
+        "bottom_button_target": bottomButtonTarget,
         "featured_image": featuredImage?.toJson(),
-        "category": category?.toJson(),
+        "banner_image": bannerImage,
+        "browser_title": browserTitle,
+        "og_title": ogTitle,
+        "meta_description": metaDescription,
+        "og_description": ogDescription,
+        "og_image": ogImage,
+        "meta_keywords": metaKeywords,
+        "bottom_description": bottomDescription,
+        "extra_js": extraJs,
+        "visit_count": visitCount,
         "tags": tags == null ? [] : List<dynamic>.from(tags!.map((x) => x)),
-    };
-}
-
-class Category {
-    int? id;
-    String? slug;
-    String? name;
-    String? title;
-
-    Category({
-        this.id,
-        this.slug,
-        this.name,
-        this.title,
-    });
-
-    factory Category.fromJson(Map<String, dynamic> json) => Category(
-        id: json["id"],
-        slug: json["slug"],
-        name: json["name"],
-        title: json["title"],
-    );
-
-    Map<String, dynamic> toJson() => {
-        "id": id,
-        "slug": slug,
-        "name": name,
-        "title": title,
+        "related_blogs": relatedBlogs == null ? [] : List<dynamic>.from(relatedBlogs!.map((x) => x.toJson())),
     };
 }
 
@@ -200,98 +224,78 @@ class PublishedBy {
     };
 }
 
-class Links {
-    String? first;
-    String? last;
-    dynamic prev;
-    dynamic next;
+class RelatedBlog {
+    int? id;
+    String? slug;
+    String? title;
+    String? shortDescription;
+    DateTime? publishedOn;
+    PublishedBy? publishedBy;
+    FeaturedImage? featuredImage;
+    Category? category;
+    List<dynamic>? tags;
 
-    Links({
-        this.first,
-        this.last,
-        this.prev,
-        this.next,
+    RelatedBlog({
+        this.id,
+        this.slug,
+        this.title,
+        this.shortDescription,
+        this.publishedOn,
+        this.publishedBy,
+        this.featuredImage,
+        this.category,
+        this.tags,
     });
 
-    factory Links.fromJson(Map<String, dynamic> json) => Links(
-        first: json["first"],
-        last: json["last"],
-        prev: json["prev"],
-        next: json["next"],
+    factory RelatedBlog.fromJson(Map<String, dynamic> json) => RelatedBlog(
+        id: json["id"],
+        slug: json["slug"],
+        title: json["title"],
+        shortDescription: json["short_description"],
+        publishedOn: json["published_on"] == null ? null : DateTime.parse(json["published_on"]),
+        publishedBy: json["published_by"] == null ? null : PublishedBy.fromJson(json["published_by"]),
+        featuredImage: json["featured_image"] == null ? null : FeaturedImage.fromJson(json["featured_image"]),
+        category: json["category"] == null ? null : Category.fromJson(json["category"]),
+        tags: json["tags"] == null ? [] : List<dynamic>.from(json["tags"]!.map((x) => x)),
     );
 
     Map<String, dynamic> toJson() => {
-        "first": first,
-        "last": last,
-        "prev": prev,
-        "next": next,
+        "id": id,
+        "slug": slug,
+        "title": title,
+        "short_description": shortDescription,
+        "published_on": publishedOn?.toIso8601String(),
+        "published_by": publishedBy?.toJson(),
+        "featured_image": featuredImage?.toJson(),
+        "category": category?.toJson(),
+        "tags": tags == null ? [] : List<dynamic>.from(tags!.map((x) => x)),
     };
 }
 
-class Meta {
-    int? currentPage;
-    int? from;
-    int? lastPage;
-    List<Link>? links;
-    String? path;
-    int? perPage;
-    int? to;
-    int? total;
+class Category {
+    int? id;
+    String? slug;
+    String? name;
+    String? title;
 
-    Meta({
-        this.currentPage,
-        this.from,
-        this.lastPage,
-        this.links,
-        this.path,
-        this.perPage,
-        this.to,
-        this.total,
+    Category({
+        this.id,
+        this.slug,
+        this.name,
+        this.title,
     });
 
-    factory Meta.fromJson(Map<String, dynamic> json) => Meta(
-        currentPage: json["current_page"],
-        from: json["from"],
-        lastPage: json["last_page"],
-        links: json["links"] == null ? [] : List<Link>.from(json["links"]!.map((x) => Link.fromJson(x))),
-        path: json["path"],
-        perPage: json["per_page"],
-        to: json["to"],
-        total: json["total"],
+    factory Category.fromJson(Map<String, dynamic> json) => Category(
+        id: json["id"],
+        slug: json["slug"],
+        name: json["name"],
+        title: json["title"],
     );
 
     Map<String, dynamic> toJson() => {
-        "current_page": currentPage,
-        "from": from,
-        "last_page": lastPage,
-        "links": links == null ? [] : List<dynamic>.from(links!.map((x) => x.toJson())),
-        "path": path,
-        "per_page": perPage,
-        "to": to,
-        "total": total,
-    };
-}
-
-class Link {
-    String? url;
-    String? label;
-    bool? active;
-
-    Link({
-        this.url,
-        this.label,
-        this.active,
-    });
-
-    factory Link.fromJson(Map<String, dynamic> json) => Link(
-        url: json["url"],
-        label: json["label"],
-        active: json["active"],
-    );
-
-    Map<String, dynamic> toJson() => {
-        "url": url,
-        "label": label,
-        "active": active,
+        "id": id,
+        "slug": slug,
+        "name": name,
+        "title": title,
     };
 }

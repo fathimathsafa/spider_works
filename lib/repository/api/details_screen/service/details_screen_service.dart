@@ -1,12 +1,11 @@
 import 'dart:developer';
 
-import 'package:news_spider/repository/helper/api_helper.dart';
-
+import '../../../helper/api_helper.dart';
 
 class NewsDetailsService {
-  static Future<dynamic> fetchData(slug) async {
+  static Future<dynamic> fetchNewsDetails(String slug) async {
     try {
-      var decodedData = ApiHelper.getData(endPoint: "blogs/$slug");
+      var decodedData = await ApiHelper.getData(endPoint: "blogs/$slug");
       return decodedData;
     } catch (e) {
       log("$e");

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:news_spider/core/constants/colors.dart';
 import 'package:news_spider/core/constants/text_styles.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-// refactored here to call in home screen to display news articles
 class NewsCard extends StatelessWidget {
   const NewsCard({
     super.key,
@@ -23,41 +23,47 @@ class NewsCard extends StatelessWidget {
     var size = MediaQuery.sizeOf(context);
     return SizedBox(
       child: Container(
-        height: size.height * .22,
+        height: size.height * .22, 
         decoration: BoxDecoration(
           color: ColorConstants.grey,
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(8.r), 
           image:
               DecorationImage(image: NetworkImage(imageUrl), fit: BoxFit.cover),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(15.0),
+          padding: EdgeInsets.all(15.w), 
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                name,
-                style: GLTextStyles.loraStyle(
-                    size: 16,
-                    color: ColorConstants.white,
-                    weight: FontWeight.w700),
+              Expanded(
+                child: Text(
+                  name,
+                  style: GLTextStyles.loraStyle(
+                      size: 16.sp,
+                      color: ColorConstants.white,
+                      weight: FontWeight.w700),
+                ),
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text(
-                    publishedBy,
-                    style: GLTextStyles.nunitoStyle(
-                        size: 12,
-                        color: ColorConstants.white,
-                        weight: FontWeight.w600),
+                  Expanded(
+                    child: Text(
+                      publishedBy,
+                      style: GLTextStyles.nunitoStyle(
+                          size: 12.sp, 
+                          color: ColorConstants.white,
+                          weight: FontWeight.w600),
+                    ),
                   ),
-                  Text(
-                    DateFormat('dd/MM/yyyy').format(publishedOn).toString(),
-                    style: GLTextStyles.nunitoStyle(
-                        size: 12,
-                        color: ColorConstants.white,
-                        weight: FontWeight.w600),
+                  Flexible(
+                    child: Text(
+                      DateFormat('dd/MM/yyyy').format(publishedOn).toString(),
+                      style: GLTextStyles.nunitoStyle(
+                          size: 12.sp, 
+                          color: ColorConstants.white,
+                          weight: FontWeight.w600),
+                    ),
                   ),
                 ],
               )
